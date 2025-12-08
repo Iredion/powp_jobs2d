@@ -1,10 +1,11 @@
-package edu.kis.powp.jobs2d.events;
+package edu.kis.powp.jobs2d.drivers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import edu.kis.legacy.drawer.shape.ILine;
 import edu.kis.powp.jobs2d.drivers.adapter.LineDrawerAdapter;
+import edu.kis.powp.jobs2d.features.DriverFeature;
 
 public class SelectLineOptionListener implements ActionListener{
     
@@ -18,6 +19,8 @@ public class SelectLineOptionListener implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent event){
-        this.lineDrawerAdapter.setILine(iLine);
+        lineDrawerAdapter.setILine(iLine);
+        DriverFeature.getDriverManager().setCurrentDriver(lineDrawerAdapter);
+        DriverFeature.updateDriverInfo();
     }
 }

@@ -21,7 +21,7 @@ public class DriverFeature {
 	 */
 	public static void setupDriverPlugin(Application application) {
 		app = application;
-		app.addComponentMenu(DriverFeature.class, "Drivers");
+		// app.addComponentMenu(DriverFeature.class, "Drivers");
 	}
 
 	/**
