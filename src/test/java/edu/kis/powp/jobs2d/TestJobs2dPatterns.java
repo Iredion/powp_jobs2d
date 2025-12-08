@@ -7,9 +7,12 @@ import java.util.logging.Logger;
 
 import edu.kis.legacy.drawer.panel.DefaultDrawerFrame;
 import edu.kis.legacy.drawer.panel.DrawPanelController;
+import edu.kis.legacy.drawer.shape.LineFactory;
 import edu.kis.powp.appbase.Application;
 import edu.kis.powp.jobs2d.drivers.adapter.JobsToDrawAdapter;
+import edu.kis.powp.jobs2d.drivers.adapter.LineDrawerAdapter;
 import edu.kis.powp.jobs2d.events.SelectChangeVisibleOptionListener;
+import edu.kis.powp.jobs2d.events.SelectLineOptionListener;
 import edu.kis.powp.jobs2d.events.SelectTestFigureOptionListener;
 import edu.kis.powp.jobs2d.features.DrawerFeature;
 import edu.kis.powp.jobs2d.features.DriverFeature;
@@ -39,12 +42,19 @@ public class TestJobs2dPatterns {
 	 * @param application Application context.
 	 */
 	private static void setupDrivers(Application application) {
-		Job2dDriver loggerDriver = new LoggerDriver();
-		DriverFeature.addDriver("Logger Driver", loggerDriver);
-		DriverFeature.getDriverManager().setCurrentDriver(loggerDriver);
+		// Job2dDriver loggerDriver = new LoggerDriver();
+		// DriverFeature.addDriver("Logger Driver", loggerDriver);
+		// DriverFeature.getDriverManager().setCurrentDriver(loggerDriver);
 
-		Job2dDriver testDriver = new JobsToDrawAdapter(DrawerFeature.getDrawerController());
-		DriverFeature.addDriver("Buggy Simulator", testDriver);
+		// Job2dDriver testDriver = new JobsToDrawAdapter(DrawerFeature.getDrawerController());
+		// DriverFeature.addDriver("Buggy Simulator", testDriver);
+		// SelectLineOptionListener selectLineOptionListener = new SelectLineOptionListener(LineDrawerAdapter.get, null)
+		Job2dDriver regularLineDriver = new LineDrawerAdapter(LineFactory.getBasicLine(), DrawerFeature.getDrawerController());
+		DriverFeature.addDriver("Regular Line", regularLineDriver);
+		Job2dDriver dottedLineDriver = new LineDrawerAdapter(LineFactory.getDottedLine(), DrawerFeature.getDrawerController());
+		DriverFeature.addDriver("Dotted Line", dottedLineDriver);
+		Job2dDriver specialLineDriver = new LineDrawerAdapter(LineFactory.getSpecialLine(), DrawerFeature.getDrawerController());
+		DriverFeature.addDriver("Special Line", specialLineDriver);
 
 		DriverFeature.updateDriverInfo();
 	}
